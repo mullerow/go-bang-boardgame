@@ -18,8 +18,10 @@ function renderGame() {
     for (let x = 1; x < fieldsize + 1; x++) {
       const field = document.createElement("div");
       field.id = "-" + x + "-" + y;
-      field.textContent = field.id;
-      console.log("field-id", field.id);
+      field.xCoordinate = x;
+      field.yCoordinate = y;
+      //field.textContent = field.id;
+      //console.log("field-id", field.id);
       FieldColumn.appendChild(field);
       field.classList.add("field-basic-style");
       field.classList.add("transparent");
@@ -27,10 +29,25 @@ function renderGame() {
   }
 }
 
+function checkrules(e) {
+  console.log("geklickt", e.target.id);
+  xCoordinate = e.target.xCoordinate;
+  yCoordinate = e.target.yCoordinate;
+
+  // untersuche die Siegbedingungen (5 in eine reihe)
+  for (let y = yCoordinate - 4; y < yCoordinate + 5; y++) {
+    for (let x = xCoordinate - 4; x < xCoordinate + 5; x++) {
+      if (x < 1 || y < 1 || (x < 1 && y < 1)) {
+        continue;
+      } else {
+        console.log(x, y);
+      }
+    }
+  }
+}
+
 function setCharacter(e) {
   const clickedField = e.target;
-  console.log("target", e.target);
-  console.log(" playerRotation", playerRotation);
   if (clickedField.classList.contains("transparent")) {
     if (playerRotation % 2 === 0) {
       clickedField.style.backgroundColor = "silver";
@@ -44,6 +61,7 @@ function setCharacter(e) {
       playerRotation++;
     }
   }
+  checkrules(e);
 }
 
 restartButton.addEventListener("click", renderGame);
