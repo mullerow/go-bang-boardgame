@@ -27,6 +27,7 @@ p {
 
 .board-field {
   margin: 50px;
+  position: relative;
 }
 
 .restart-game-button {
@@ -83,4 +84,15 @@ p {
   border-radius: 10px;
   background-color: rgb(236, 135, 85);
   display: inline-block;
+}
+
+.winner-text {
+  position: absolute;
+  width: 550px;
+  height: 100px;
+  z-index: 51;
+  top: 65%;
+  left: 35%;
+  font-size: 50px;
+  transform: rotate(45deg);
 }

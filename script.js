@@ -2,6 +2,7 @@ const boardField = document.querySelector(".board-field");
 const restartButton = document.querySelector(".restart-game-button");
 const sizeInput = document.querySelector("#field-size-input");
 const playersTurn = document.querySelector(".display-players-turn");
+const winnerText = document.querySelector(".winner-text");
 
 let fieldsize = 19;
 let result = 0;
@@ -61,8 +62,12 @@ function checkrules(e) {
 
       if (result === 5 || result === -5) {
         console.warn("PLAYER 1 WINS!!!");
+        winnerText.textContent = "PLAYER 1 WINS!!!🤪";
+        winnerText.style.backgroundColor = "silver";
       } else if (result === 50 || result === 49) {
         console.warn("PLAYER 2 WINS!!!");
+        winnerText.textContent = "PLAYER 2 WINS!!!🤪";
+        winnerText.style.backgroundColor = "silver";
       }
     }
   }
