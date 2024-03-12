@@ -95,4 +95,9 @@ p {
   left: 35%;
   font-size: 50px;
   transform: rotate(45deg);
+  background-color: silver;
+}
+
+.hide-winner {
+  display: none;
 }

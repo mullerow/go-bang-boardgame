@@ -9,7 +9,9 @@ let result = 0;
 let playerRotation = 0;
 
 function renderGame() {
+  winnerText.classList.add("hide-winner");
   boardField.innerHTML = "";
+  winnerText.innerHTML = "";
 
   fieldsize = Number(sizeInput.value);
 
@@ -64,10 +66,12 @@ function checkrules(e) {
         console.warn("PLAYER 1 WINS!!!");
         winnerText.textContent = "PLAYER 1 WINS!!!🤪";
         winnerText.style.backgroundColor = "silver";
+        winnerText.classList.remove("hide-winner");
       } else if (result === 50 || result === 49) {
         console.warn("PLAYER 2 WINS!!!");
         winnerText.textContent = "PLAYER 2 WINS!!!🤪";
         winnerText.style.backgroundColor = "silver";
+        winnerText.classList.remove("hide-winner");
       }
     }
   }
