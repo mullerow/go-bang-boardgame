@@ -1,0 +1,35 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: monospace;
+}
+
+main {
+  width: 600px;
+  height: 600px;
+  background-color: blanchedalmond;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.restart-game-button {
+  margin: 10px;
+}
+
+.field-basic-style {
+  width: 35px;
+  height: 35px;
+  background-color: rgb(241, 122, 37);
+  border: 1px solid black;
+  font-size: 12px;
+  text-align: center;
+}
+
+.field-column {
+  display: flex;
+}
