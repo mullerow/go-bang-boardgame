@@ -9,27 +9,52 @@ html {
 }
 
 main {
-  width: 600px;
-  height: 600px;
+  width: 1000px;
+  height: 1000px;
   background-color: blanchedalmond;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
 }
 
+.board-field {
+  margin: 50px;
+}
+
 .restart-game-button {
   margin: 10px;
+  background-color: aquamarine;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .field-basic-style {
-  width: 35px;
-  height: 35px;
-  background-color: rgb(241, 122, 37);
+  width: 50px;
+  height: 50px;
+  background-color: darksalmon;
   border: 1px solid black;
   font-size: 12px;
   text-align: center;
 }
 
+.field-basic-style:hover {
+  background-color: cornsilk;
+}
+
 .field-column {
   display: flex;
+}
+
+.darkSalmon {
+  background-color: darksalmon;
+}
+
+.green {
+  background-color: green;
+}
+
+.silver {
+  background-color: silver;
 }
