@@ -14,10 +14,13 @@
         <label for="field-size-input">wie groß darf das Spielfeld sein? </label>
         <input id="field-size-input" type="number" name="field-size-input" value="19">
         <label for="field-size-input">Felder in X und in Y Richtung </label>
+        <p> Siegbedingung: Wer zuerst 5 steine der eigenene Farbe in einer Reihe hat (Siegkette), gewinnt!</p>
+        <ul>
+            <li>derzeit implementiert: horizontale Siegketten </li>
+        </ul>
+        <div class="display-players-turn">Spieler <strong>Schwarz</strong> ist an der Reihe!</div>
+        <div class="board-field"></div>
 
-        <div class="board-field">
-
-        </div>
     </main>
     <script src="script.js"></script>
 </body>

@@ -1,9 +1,10 @@
 const boardField = document.querySelector(".board-field");
 const restartButton = document.querySelector(".restart-game-button");
 const sizeInput = document.querySelector("#field-size-input");
+const playersTurn = document.querySelector(".display-players-turn");
+
 let fieldsize = 19;
 let result = 0;
-
 let playerRotation = 0;
 
 function renderGame() {
@@ -56,13 +57,12 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
-
       console.log("result", result);
 
       if (result === 5 || result === -5) {
-        console.log("PLAYER 1 WINS!!!");
+        console.warn("PLAYER 1 WINS!!!");
       } else if (result === 50 || result === 49) {
-        console.log("PLAYER 2 WINS!!!");
+        console.warn("PLAYER 2 WINS!!!");
       }
     }
   }
@@ -75,23 +75,15 @@ function checkrules(e) {
     for (let x = xCoordinate - 4; x < xCoordinate + 5; x++) {
       if (x < 1 || y < 1 || y > fieldsize || x > fieldsize) {
         continue;
-      } else {
-        // check 1:  nur x-achse
-        for (let z = -4; z <= x; z++) {
-          const searchedID = "-" + x + "-" + y;
-          const searchedField = document.getElementById(searchedID);
-          if (searchedField) {
-            searchedPoints = searchedField.player;
-            console.log("searchedID", searchedID);
-          }
-        }
-      }
-    }
-  }
-*/
+      } */
 
 function setCharacter(e) {
   const clickedField = e.target;
+  if (playerRotation % 2 === 0) {
+    playersTurn.textContent = "Spieler WEIß ist an der Reihe!";
+  } else {
+    playersTurn.textContent = "Spieler Schwarz ist an der Reihe!";
+  }
   if (clickedField.classList.contains("transparent")) {
     if (playerRotation % 2 === 0) {
       clickedField.style.backgroundColor = "silver";

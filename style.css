@@ -10,7 +10,7 @@ html {
 
 main {
   width: 1000px;
-  height: 1100px;
+  height: 1000px;
   background-color: blanchedalmond;
   margin-left: auto;
   margin-right: auto;
@@ -19,6 +19,10 @@ main {
 
 input {
   width: 70px;
+}
+
+p {
+  margin-left: 20px;
 }
 
 .board-field {
@@ -35,17 +39,17 @@ input {
 }
 
 .field-basic-style {
-  width: 50px;
-  height: 50px;
+  width: 4%;
+  height: 40px;
   border: 1px solid black;
   font-size: 12px;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 40%;
   padding-top: 15px;
 }
 
 .field-basic-style:hover {
-  background-color: cornsilk;
+  background-color: rgb(233, 191, 56);
 }
 
 .field-column {
@@ -70,4 +74,13 @@ input {
     white 0%,
     rgb(155, 155, 155) 30%
   );
+}
+
+.display-players-turn {
+  font-size: 20px;
+  margin-left: 20px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(236, 135, 85);
+  display: inline-block;
 }
