@@ -10,7 +10,7 @@ html {
 
 main {
   width: 1000px;
-  height: 1000px;
+  height: 1100px;
   background-color: blanchedalmond;
   margin-left: auto;
   margin-right: auto;
@@ -37,6 +37,7 @@ main {
   font-size: 12px;
   text-align: center;
   border-radius: 50%;
+  padding-top: 15px;
 }
 
 .field-basic-style:hover {
@@ -51,8 +52,8 @@ main {
   background-color: transparent;
 }
 
-.green {
-  background-color: green;
+.white {
+  background-color: white;
 }
 
 .silver {

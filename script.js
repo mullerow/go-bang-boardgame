@@ -1,11 +1,14 @@
 const boardField = document.querySelector(".board-field");
 const restartButton = document.querySelector(".restart-game-button");
-const fieldsize = 19;
+const sizeInput = document.querySelector("#field-size-input");
+let fieldsize = 19;
+
 let playerRotation = 0;
 
 function renderGame() {
   boardField.innerHTML = "";
-  console.log("render me!");
+
+  fieldsize = Number(sizeInput.value);
 
   for (let y = 1; y < fieldsize + 1; y++) {
     FieldColumn = document.createElement("div");
@@ -32,10 +35,10 @@ function setCharacter(e) {
     if (playerRotation % 2 === 0) {
       clickedField.style.backgroundColor = "silver";
       clickedField.classList.remove("transparent");
-      clickedField.classList.add("green");
+      clickedField.classList.add("white");
       playerRotation++;
     } else {
-      clickedField.style.backgroundColor = "green";
+      clickedField.style.backgroundColor = "white";
       clickedField.classList.remove("transparent");
       clickedField.classList.add("silver");
       playerRotation++;
