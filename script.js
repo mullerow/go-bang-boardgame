@@ -19,7 +19,7 @@ function renderGame() {
       console.log("field-id", field.id);
       FieldColumn.appendChild(field);
       field.classList.add("field-basic-style");
-      field.classList.add("darkSalmon");
+      field.classList.add("transparent");
     }
   }
 }
@@ -28,15 +28,15 @@ function setCharacter(e) {
   const clickedField = e.target;
   console.log("target", e.target);
   console.log(" playerRotation", playerRotation);
-  if (clickedField.classList.contains("darkSalmon")) {
+  if (clickedField.classList.contains("transparent")) {
     if (playerRotation % 2 === 0) {
       clickedField.style.backgroundColor = "silver";
-      clickedField.classList.remove("darkSalmon");
+      clickedField.classList.remove("transparent");
       clickedField.classList.add("green");
       playerRotation++;
     } else {
       clickedField.style.backgroundColor = "green";
-      clickedField.classList.remove("darkSalmon");
+      clickedField.classList.remove("transparent");
       clickedField.classList.add("silver");
       playerRotation++;
     }
