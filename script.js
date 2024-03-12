@@ -33,11 +33,11 @@ function checkrules(e) {
   console.log("geklickt", e.target.id);
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
-
+  console.log("fieldsite", fieldsize);
   // untersuche die Siegbedingungen (5 in eine reihe)
   for (let y = yCoordinate - 4; y < yCoordinate + 5; y++) {
     for (let x = xCoordinate - 4; x < xCoordinate + 5; x++) {
-      if (x < 1 || y < 1 || (x < 1 && y < 1)) {
+      if (x < 1 || y < 1 || y > fieldsize || x > fieldsize) {
         continue;
       } else {
         console.log(x, y);
