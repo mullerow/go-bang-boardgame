@@ -20,8 +20,6 @@ function renderGame() {
       field.id = "-" + x + "-" + y;
       field.xCoordinate = x;
       field.yCoordinate = y;
-      //field.textContent = field.id;
-      //console.log("field-id", field.id);
       FieldColumn.appendChild(field);
       field.classList.add("field-basic-style");
       field.classList.add("transparent");
@@ -40,7 +38,10 @@ function checkrules(e) {
       if (x < 1 || y < 1 || y > fieldsize || x > fieldsize) {
         continue;
       } else {
-        console.log(x, y);
+        // check 1 nur x-achse
+        for (let z = -4; z <= x; z++) {
+          console.log("z", z);
+        }
       }
     }
   }
@@ -53,11 +54,13 @@ function setCharacter(e) {
       clickedField.style.backgroundColor = "silver";
       clickedField.classList.remove("transparent");
       clickedField.classList.add("white");
+      e.target.player = 1; //  player 1 (white) bekommt 1 punkt pro feld
       playerRotation++;
     } else {
       clickedField.style.backgroundColor = "white";
       clickedField.classList.remove("transparent");
       clickedField.classList.add("silver");
+      e.target.player = 2; //  player 2 (schwarz) bekommt 2 punkte pro feld
       playerRotation++;
     }
   }

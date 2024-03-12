@@ -53,9 +53,17 @@ main {
 }
 
 .white {
-  background-color: Platinum;
+  background-image: radial-gradient(
+    farthest-corner at 35px 10px,
+    white 0%,
+    rgb(0, 0, 0) 30%
+  );
 }
 
 .silver {
-  background-color: silver;
+  background-image: radial-gradient(
+    farthest-corner at 35px 10px,
+    white 0%,
+    rgb(155, 155, 155) 30%
+  );
 }
