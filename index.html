@@ -13,13 +13,18 @@
         <button class="restart-game-button">Restart Game</button>
         <label for="field-size-input">wie groß darf das Spielfeld sein? </label>
         <input id="field-size-input" type="number" name="field-size-input" value="19">
-        <label for="field-size-input">Felder in X und in Y Richtung </label>
+        <label for="field-size-input">Felder in X und in Y Richtung (Original 19x19) </label>
         <div class="winner-text hide-winner"></div>
-        <p> Siegbedingung: Wer zuerst 5 Steine der eigenene Farbe in einer Reihe hat (Siegkette), gewinnt!</p>
+        <h3>Regelwerk</h3>
         <ul>
-            <li>derzeit implementiert: horizontale Siegketten </li>
-            <li>derzeit implementiert: vertikale Siegketten </li>
-            <li>derzeit implementiert: diagonale Siegketten von links oben nach rechts unten </li>
+            <li>Siegbedingung: Wer zuerst 5 Steine der eigenene Farbe in einer Reihe hat (Siegkette),
+                gewinnt!(Implementiert)</li>
+            <li>Die Siegkette kann horizontal, vertikal oder diagonal erfolgen (Implementiert)</li>
+            <li>Wenn zwei gleichfarbige Steine nebeneinander von zwei Steine des Gegenspielers flankiert werden (alle 4
+                Steine in einer Reihe), werden die eingekesselten Steine entfernt (nicht Implementiert) </li>
+            <li>Die Einkesselung kann horizontal, vertikale oder diagonal erfolgen (nicht Implementiert)</li>
+            <li>Wenn ein Spieler durch das Setzen seines Steins eine Einkesselung/Entfernung seiner eigenen Steine
+                erzwingen möchte, so ist der Zug verboten (nicht Implementiert)</li>
         </ul>
         <div class="display-players-turn">Spieler <strong>Schwarz</strong> ist an der Reihe!</div>
         <div class="board-field">

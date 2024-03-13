@@ -26,6 +26,14 @@ p {
   margin-left: 20px;
 }
 
+h3 {
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
 .board-field {
   margin: 50px;
   position: relative;
