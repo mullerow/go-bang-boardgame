@@ -95,7 +95,7 @@ function checkrules(e) {
   result = 0;
   let yy = yCoordinate - 4;
   let xx = xCoordinate - 4;
-  for (; yy <= yCoordinate + 4 && xx <= yCoordinate + 4; yy++ && xx++) {
+  for (; yy <= yCoordinate + 4 && xx <= xCoordinate + 4; yy++ && xx++) {
     if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
       continue;
     } else {
@@ -149,15 +149,13 @@ function setCharacter(e) {
   }
   if (clickedField.classList.contains("transparent")) {
     if (playerRotation % 2 === 0) {
-      clickedField.style.backgroundColor = "silver";
       clickedField.classList.remove("transparent");
       clickedField.classList.add("white");
       e.target.player = 1; //  player 1 (white) bekommt 1 punkt pro feld, wenn 5 felder in einer reihe = 5 sind, dann gewinnt player 1
       playerRotation++;
     } else {
-      clickedField.style.backgroundColor = "white";
       clickedField.classList.remove("transparent");
-      clickedField.classList.add("silver");
+      clickedField.classList.add("black");
       e.target.player = 10; //  player 2 (schwarz) bekommt 10 punkte pro feld, wenn 5 felder in einer reihe = 50 sind, dann gewinnt player 2
       playerRotation++;
     }
