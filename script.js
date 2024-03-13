@@ -12,7 +12,6 @@ let playerRotation = 0;
 function renderGame() {
   winnerText.classList.add("hide-winner");
   boardField.innerHTML = "";
-  winnerText.innerHTML = "";
 
   fieldsize = Number(sizeInput.value);
 
@@ -89,6 +88,32 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
+      checkForWinner();
+    }
+  }
+  /////// check 3:  Diagnonal von links oben nach rechts unten /////////////////////////////////////////
+  result = 0;
+  let yy = yCoordinate - 4;
+  let xx = xCoordinate - 4;
+  for (; yy <= yCoordinate + 4 && xx <= yCoordinate + 4; yy++ && xx++) {
+    if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
+      continue;
+    } else {
+      const substractionField = 0;
+      counter++;
+      // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
+      if (counter > 5) {
+        const substractionID = "-" + (xx - 5) + "-" + (yy - 5);
+        const substractionField = document.getElementById(substractionID);
+      }
+      // suche nach allen relevanten feldern für die siegeskette
+      const searchedID = "-" + xx + "-" + yy;
+      const searchedField = document.getElementById(searchedID);
+      if (!substractionField) {
+        result += searchedField.player;
+      } else {
+        result += searchedField.player - substractionField.player;
+      }
       console.log(
         "searchedField",
         searchedField.player,
@@ -98,10 +123,8 @@ function checkrules(e) {
         result
       );
       checkForWinner();
-      //
     }
   }
-
   result = 0;
 }
 
