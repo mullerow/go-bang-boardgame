@@ -89,14 +89,15 @@ p {
 
 .winner-text {
   position: absolute;
-  width: 550px;
-  height: 100px;
   z-index: 51;
   top: 65%;
   left: 35%;
-  font-size: 50px;
-  transform: rotate(45deg);
-  background-color: silver;
+  font-size: 60px;
+  transform: rotate(15deg);
+  background-color: transparent;
+  color: rgb(255, 85, 0);
+  text-shadow: 5px 5px 5px black;
+  font-weight: bold;
 }
 
 .hide-winner {

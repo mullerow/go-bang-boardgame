@@ -105,13 +105,6 @@ function checkrules(e) {
   result = 0;
 }
 
-/*
-  for (let y = yCoordinate - 4; y < yCoordinate + 5; y++) {
-    for (let x = xCoordinate - 4; x < xCoordinate + 5; x++) {
-      if (x < 1 || y < 1 || y > fieldsize || x > fieldsize) {
-        continue;
-      } */
-
 function checkForWinner() {
   if (result === 5 || result === -5) {
     console.warn("PLAYER 1 WINS!!!");
