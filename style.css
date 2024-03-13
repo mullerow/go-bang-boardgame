@@ -6,6 +6,7 @@
 
 html {
   font-family: monospace;
+  background-color: black;
 }
 
 main {
@@ -63,7 +64,7 @@ p {
 
 .white {
   background-image: radial-gradient(
-    farthest-corner at 35px 10px,
+    farthest-corner at 25px 10px,
     white 0%,
     rgb(0, 0, 0) 30%
   );
@@ -71,7 +72,7 @@ p {
 
 .silver {
   background-image: radial-gradient(
-    farthest-corner at 35px 10px,
+    farthest-corner at 25px 10px,
     white 0%,
     rgb(155, 155, 155) 30%
   );

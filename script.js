@@ -6,6 +6,7 @@ const winnerText = document.querySelector(".winner-text");
 
 let fieldsize = 19;
 let result = 0;
+let counter = 0;
 let playerRotation = 0;
 
 function renderGame() {
@@ -47,10 +48,13 @@ function checkrules(e) {
     if (z < 1 || z > fieldsize) {
       continue;
     } else {
+      const substractionField = 0;
+      counter++;
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
-      const substractionID = "-" + (z - 5) + "-" + yCoordinate;
-      const substractionField = document.getElementById(substractionID);
-      console.log("substractionField", substractionField);
+      if (counter > 5) {
+        const substractionID = "-" + (z - 5) + "-" + yCoordinate;
+        const substractionField = document.getElementById(substractionID);
+      }
 
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + z + "-" + yCoordinate;
@@ -60,17 +64,17 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
+      console.log("searchedField.player", searchedField.player);
+      console.log("substractionField.player", substractionField.player);
       console.log("result", result);
 
       if (result === 5 || result === -5) {
         console.warn("PLAYER 1 WINS!!!");
-        winnerText.textContent = "PLAYER 1 WINS!!!🤪";
-        winnerText.style.backgroundColor = "silver";
+        winnerText.textContent = "BLACK WINS!!!🤪";
         winnerText.classList.remove("hide-winner");
       } else if (result === 50 || result === 49) {
         console.warn("PLAYER 2 WINS!!!");
-        winnerText.textContent = "PLAYER 2 WINS!!!🤪";
-        winnerText.style.backgroundColor = "silver";
+        winnerText.textContent = "WHITE WINS!!!🤪";
         winnerText.classList.remove("hide-winner");
       }
     }
