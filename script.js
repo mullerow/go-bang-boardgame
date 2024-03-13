@@ -47,12 +47,12 @@ function checkrules(e) {
     if (z < 1 || z > fieldsize) {
       continue;
     } else {
-      const substractionField = 0;
+      let substractionField = 0;
       counter++;
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + (z - 5) + "-" + yCoordinate;
-        const substractionField = document.getElementById(substractionID);
+        substractionField = document.getElementById(substractionID);
       }
 
       // suche nach allen relevanten feldern für die siegeskette
@@ -73,12 +73,12 @@ function checkrules(e) {
     if (z < 1 || z > fieldsize) {
       continue;
     } else {
-      const substractionField = 0;
+      let substractionField = 0;
       counter++;
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + xCoordinate + "-" + (z - 5);
-        const substractionField = document.getElementById(substractionID);
+        substractionField = document.getElementById(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + xCoordinate + "-" + z;
@@ -99,12 +99,12 @@ function checkrules(e) {
     if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
       continue;
     } else {
-      const substractionField = 0;
+      let substractionField = 0;
       counter++;
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + (xx - 5) + "-" + (yy - 5);
-        const substractionField = document.getElementById(substractionID);
+        substractionField = document.getElementById(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + xx + "-" + yy;
@@ -114,14 +114,36 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
-      console.log(
-        "searchedField",
-        searchedField.player,
-        "substractionField",
-        substractionField,
-        "result",
-        result
-      );
+      checkForWinner();
+    }
+  }
+  /////// check 4:  Diagnonal von links unten nach rechts oben /////////////////////////////////////////
+
+  result = 0;
+  yy = yCoordinate + 4;
+  xx = xCoordinate - 4;
+  console.log("xx", xx, "yy", yy);
+  console.log("xCoordinate", xCoordinate, "yCoordinate", yCoordinate);
+  for (; yy >= yCoordinate - 4 && xx <= xCoordinate + 4; yy-- && xx++) {
+    if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
+      continue;
+    } else {
+      let substractionField = 0;
+      counter++;
+      // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
+      if (counter > 5) {
+        const substractionID = "-" + (xx - 5) + "-" + (yy + 5);
+        substractionField = document.getElementById(substractionID);
+      }
+      // suche nach allen relevanten feldern für die siegeskette
+      const searchedID = "-" + xx + "-" + yy;
+      const searchedField = document.getElementById(searchedID);
+      if (!substractionField) {
+        result += searchedField.player;
+      } else {
+        result += searchedField.player - substractionField.player;
+      }
+      console.log("result", result);
       checkForWinner();
     }
   }
