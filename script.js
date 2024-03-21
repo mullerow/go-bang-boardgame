@@ -34,6 +34,7 @@ function renderGame() {
 }
 
 function checkrules(e) {
+  checkDeleteStones(e);
   counter = 0;
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
@@ -162,8 +163,40 @@ function checkForWinner() {
   }
 }
 
-function checkDeleteStones() {
-  return;
+function neutralizeFields(field1ID, field2ID) {
+  console.log("hab dich");
+  let field1 = document.getElementById(field1ID);
+  let field2 = document.getElementById(field2ID);
+  field1.classList.remove("white");
+  field1.classList.remove("black");
+  field1.classList.add("transparent");
+  field1.player = 0;
+  field2.classList.remove("white");
+  field2.classList.remove("black");
+  field2.classList.add("transparent");
+  field2.player = 0;
+}
+
+function checkDeleteStones(e) {
+  xCoordinate = e.target.xCoordinate;
+  yCoordinate = e.target.yCoordinate;
+  // heraussuchen der felder welche von der gleichen farbe wie der letzte steinleger haben und zu einer einkesselung führen können
+  ///// check -X direction ////////////////////////////////////////
+  let MinusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
+  let MinusXpair = document.getElementById(MinusXPairID).player;
+  let MinusXFirstdeleteID = "-" + (xCoordinate - 1) + "-" + yCoordinate;
+  let MinusXFirstdeleteField =
+    document.getElementById(MinusXFirstdeleteID).player;
+  let MinusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
+  let MinusXSeconddeleteField =
+    document.getElementById(MinusXSeconddeleteID).player;
+
+  if (
+    MinusXpair === e.target.player &&
+    MinusXFirstdeleteField === MinusXSeconddeleteField
+  ) {
+    neutralizeFields(MinusXFirstdeleteID, MinusXSeconddeleteID);
+  }
 }
 
 function setCharacter(e) {
