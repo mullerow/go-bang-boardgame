@@ -34,6 +34,7 @@ function renderGame() {
 }
 
 function checkrules(e) {
+  counter = 0;
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
   console.log(
@@ -54,7 +55,6 @@ function checkrules(e) {
         const substractionID = "-" + (z - 5) + "-" + yCoordinate;
         substractionField = document.getElementById(substractionID);
       }
-
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + z + "-" + yCoordinate;
       const searchedField = document.getElementById(searchedID);
@@ -63,12 +63,12 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
-
       checkForWinner();
     }
   }
   /////// check 2:  nur Y-achse ///////////////////////////////////////////////////////////////////////////
   result = 0;
+  counter = 0;
   for (let z = yCoordinate - 4; z <= yCoordinate + 4; z++) {
     if (z < 1 || z > fieldsize) {
       continue;
@@ -93,6 +93,7 @@ function checkrules(e) {
   }
   /////// check 3:  Diagnonal von links oben nach rechts unten /////////////////////////////////////////
   result = 0;
+  counter = 0;
   let yy = yCoordinate - 4;
   let xx = xCoordinate - 4;
   for (; yy <= yCoordinate + 4 && xx <= xCoordinate + 4; yy++ && xx++) {
@@ -118,12 +119,12 @@ function checkrules(e) {
     }
   }
   /////// check 4:  Diagnonal von links unten nach rechts oben /////////////////////////////////////////
-
   result = 0;
+  counter = 0;
   yy = yCoordinate + 4;
   xx = xCoordinate - 4;
-  console.log("xx", xx, "yy", yy);
-  console.log("xCoordinate", xCoordinate, "yCoordinate", yCoordinate);
+  //console.log("xx", xx, "yy", yy);
+  //console.log("xCoordinate", xCoordinate, "yCoordinate", yCoordinate);
   for (; yy >= yCoordinate - 4 && xx <= xCoordinate + 4; yy-- && xx++) {
     if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
       continue;
@@ -143,7 +144,6 @@ function checkrules(e) {
       } else {
         result += searchedField.player - substractionField.player;
       }
-      console.log("result", result);
       checkForWinner();
     }
   }
@@ -162,10 +162,14 @@ function checkForWinner() {
   }
 }
 
+function checkDeleteStones() {
+  return;
+}
+
 function setCharacter(e) {
   const clickedField = e.target;
   if (playerRotation % 2 === 0) {
-    playersTurn.textContent = "Spieler WEIß ist an der Reihe!";
+    playersTurn.textContent = "Spieler Weiß ist an der Reihe!";
   } else {
     playersTurn.textContent = "Spieler Schwarz ist an der Reihe!";
   }
