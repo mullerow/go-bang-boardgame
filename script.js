@@ -180,22 +180,66 @@ function neutralizeFields(field1ID, field2ID) {
 function checkDeleteStones(e) {
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
-  // heraussuchen der felder welche von der gleichen farbe wie der letzte steinleger haben und zu einer einkesselung führen können
-  ///// check -X direction ////////////////////////////////////////
-  let MinusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
-  let MinusXpair = document.getElementById(MinusXPairID).player;
-  let MinusXFirstdeleteID = "-" + (xCoordinate - 1) + "-" + yCoordinate;
-  let MinusXFirstdeleteField =
-    document.getElementById(MinusXFirstdeleteID).player;
-  let MinusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
-  let MinusXSeconddeleteField =
-    document.getElementById(MinusXSeconddeleteID).player;
-
+  // Check for encircling
+  ///// check MinusX direction ////////////////////////////////////////
+  let minusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
+  let minusXpair = document.getElementById(minusXPairID).player;
+  let minusXFirstdeleteID = "-" + (xCoordinate - 1) + "-" + yCoordinate;
+  let minusXFirstdeleteField =
+    document.getElementById(minusXFirstdeleteID).player;
+  let minusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
+  let minusXSeconddeleteField =
+    document.getElementById(minusXSeconddeleteID).player;
   if (
-    MinusXpair === e.target.player &&
-    MinusXFirstdeleteField === MinusXSeconddeleteField
+    minusXpair === e.target.player &&
+    minusXFirstdeleteField === minusXSeconddeleteField
   ) {
-    neutralizeFields(MinusXFirstdeleteID, MinusXSeconddeleteID);
+    neutralizeFields(minusXFirstdeleteID, minusXSeconddeleteID);
+  }
+  ///// check PlusX direction ////////////////////////////////////////
+  let plusXPairID = "-" + (xCoordinate + 3) + "-" + yCoordinate;
+  let plusXpair = document.getElementById(plusXPairID).player;
+  let plusXFirstdeleteID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
+  let plusXFirstdeleteField =
+    document.getElementById(plusXFirstdeleteID).player;
+  let plusXSeconddeleteID = "-" + (xCoordinate + 2) + "-" + yCoordinate;
+  let plusXSeconddeleteField =
+    document.getElementById(plusXSeconddeleteID).player;
+  if (
+    plusXpair === e.target.player &&
+    plusXFirstdeleteField === plusXSeconddeleteField
+  ) {
+    neutralizeFields(plusXFirstdeleteID, plusXSeconddeleteID);
+  }
+  ///// check MinusY direction ////////////////////////////////////////
+  let minusYPairID = "-" + xCoordinate + "-" + (yCoordinate - 3);
+  let minusYpair = document.getElementById(minusYPairID).player;
+  let minusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate - 1);
+  let minusYFirstdeleteField =
+    document.getElementById(minusYFirstdeleteID).player;
+  let minusYSeconddeleteID = "-" + xCoordinate + "-" + (yCoordinate - 2);
+  let minusYSeconddeleteField =
+    document.getElementById(minusYSeconddeleteID).player;
+  if (
+    minusYpair === e.target.player &&
+    minusYFirstdeleteField === minusYSeconddeleteField
+  ) {
+    neutralizeFields(minusYFirstdeleteID, minusYSeconddeleteID);
+  }
+  ///// check PlusY direction ////////////////////////////////////////
+  let plusYPairID = "-" + xCoordinate + "-" + (yCoordinate + 3);
+  let plusYpair = document.getElementById(plusYPairID).player;
+  let plusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate + 1);
+  let plusYFirstdeleteField =
+    document.getElementById(plusYFirstdeleteID).player;
+  let plusYSeconddeleteID = "-" + xCoordinate + "-" + (yCoordinate + 2);
+  let plusYSeconddeleteField =
+    document.getElementById(plusYSeconddeleteID).player;
+  if (
+    plusYpair === e.target.player &&
+    plusYFirstdeleteField === plusYSeconddeleteField
+  ) {
+    neutralizeFields(plusYFirstdeleteID, plusYSeconddeleteID);
   }
 }
 
