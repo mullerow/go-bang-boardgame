@@ -191,7 +191,8 @@ function checkDeleteStones(e) {
     document.getElementById(minusXSeconddeleteID).player;
   if (
     minusXpair === e.target.player &&
-    minusXFirstdeleteField === minusXSeconddeleteField
+    minusXFirstdeleteField === minusXSeconddeleteField &&
+    e.target.player !== minusXFirstdeleteField
   ) {
     neutralizeFields(minusXFirstdeleteID, minusXSeconddeleteID);
   }
@@ -206,7 +207,8 @@ function checkDeleteStones(e) {
     document.getElementById(plusXSeconddeleteID).player;
   if (
     plusXpair === e.target.player &&
-    plusXFirstdeleteField === plusXSeconddeleteField
+    plusXFirstdeleteField === plusXSeconddeleteField &&
+    e.target.player !== plusXFirstdeleteField
   ) {
     neutralizeFields(plusXFirstdeleteID, plusXSeconddeleteID);
   }
@@ -221,7 +223,8 @@ function checkDeleteStones(e) {
     document.getElementById(minusYSeconddeleteID).player;
   if (
     minusYpair === e.target.player &&
-    minusYFirstdeleteField === minusYSeconddeleteField
+    minusYFirstdeleteField === minusYSeconddeleteField &&
+    e.target.player !== minusYFirstdeleteField
   ) {
     neutralizeFields(minusYFirstdeleteID, minusYSeconddeleteID);
   }
@@ -236,7 +239,8 @@ function checkDeleteStones(e) {
     document.getElementById(plusYSeconddeleteID).player;
   if (
     plusYpair === e.target.player &&
-    plusYFirstdeleteField === plusYSeconddeleteField
+    plusYFirstdeleteField === plusYSeconddeleteField &&
+    e.target.player !== plusYFirstdeleteField
   ) {
     neutralizeFields(plusYFirstdeleteID, plusYSeconddeleteID);
   }
@@ -255,7 +259,8 @@ function checkDeleteStones(e) {
   ).player;
   if (
     minusTLBRpair === e.target.player &&
-    minusTLBRFirstdeleteField === minusTLBRSeconddeleteField
+    minusTLBRFirstdeleteField === minusTLBRSeconddeleteField &&
+    e.target.player !== minusTLBRFirstdeleteField
   ) {
     neutralizeFields(minusTLBRFirstdeleteID, minusTLBRSeconddeleteID);
   }
@@ -274,7 +279,8 @@ function checkDeleteStones(e) {
   ).player;
   if (
     minusBLTRpair === e.target.player &&
-    minusBLTRFirstdeleteField === minusBLTRSeconddeleteField
+    minusBLTRFirstdeleteField === minusBLTRSeconddeleteField &&
+    e.target.player !== minusBLTRFirstdeleteField
   ) {
     neutralizeFields(minusBLTRFirstdeleteID, minusBLTRSeconddeleteID);
   }
@@ -292,7 +298,8 @@ function checkDeleteStones(e) {
   ).player;
   if (
     plusTLBRpair === e.target.player &&
-    plusTLBRFirstdeleteField === plusTLBRSeconddeleteField
+    plusTLBRFirstdeleteField === plusTLBRSeconddeleteField &&
+    e.target.player !== plusTLBRFirstdeleteField
   ) {
     neutralizeFields(plusTLBRFirstdeleteID, plusTLBRSeconddeleteID);
   }
