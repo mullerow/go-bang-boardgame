@@ -164,7 +164,6 @@ function checkForWinner() {
 }
 
 function neutralizeFields(field1ID, field2ID) {
-  console.log("hab dich");
   let field1 = document.getElementById(field1ID);
   let field2 = document.getElementById(field2ID);
   field1.classList.remove("white");
@@ -180,7 +179,7 @@ function neutralizeFields(field1ID, field2ID) {
 function checkDeleteStones(e) {
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
-  // Check for encircling
+  // Check for encircling enemy figures
   ///// check MinusX direction ////////////////////////////////////////
   let minusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
   let minusXpair = document.getElementById(minusXPairID).player;
@@ -240,6 +239,80 @@ function checkDeleteStones(e) {
     plusYFirstdeleteField === plusYSeconddeleteField
   ) {
     neutralizeFields(plusYFirstdeleteID, plusYSeconddeleteID);
+  }
+  ///// check Minus Diagonal-top-left-to-bottom-right direction (minusTLBR)  ////////////////////////////////////////
+  let minusTLBRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate - 3);
+  let minusTLBRpair = document.getElementById(minusTLBRPairID).player;
+  let minusTLBRFirstdeleteID =
+    "-" + (xCoordinate - 1) + "-" + (yCoordinate - 1);
+  let minusTLBRFirstdeleteField = document.getElementById(
+    minusTLBRFirstdeleteID
+  ).player;
+  let minusTLBRSeconddeleteID =
+    "-" + (xCoordinate - 2) + "-" + (yCoordinate - 2);
+  let minusTLBRSeconddeleteField = document.getElementById(
+    minusTLBRSeconddeleteID
+  ).player;
+  if (
+    minusTLBRpair === e.target.player &&
+    minusTLBRFirstdeleteField === minusTLBRSeconddeleteField
+  ) {
+    neutralizeFields(minusTLBRFirstdeleteID, minusTLBRSeconddeleteID);
+  }
+  ///// check Minus Diagonal-bottom-left-to-top-right direction (minusBLTR)  ////////////////////////////////////////
+  let minusBLTRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate + 3);
+  let minusBLTRpair = document.getElementById(minusBLTRPairID).player;
+  let minusBLTRFirstdeleteID =
+    "-" + (xCoordinate - 1) + "-" + (yCoordinate + 1);
+  let minusBLTRFirstdeleteField = document.getElementById(
+    minusBLTRFirstdeleteID
+  ).player;
+  let minusBLTRSeconddeleteID =
+    "-" + (xCoordinate - 2) + "-" + (yCoordinate + 2);
+  let minusBLTRSeconddeleteField = document.getElementById(
+    minusBLTRSeconddeleteID
+  ).player;
+  if (
+    minusBLTRpair === e.target.player &&
+    minusBLTRFirstdeleteField === minusBLTRSeconddeleteField
+  ) {
+    neutralizeFields(minusBLTRFirstdeleteID, minusBLTRSeconddeleteID);
+  }
+  ///// check plus Diagonal-top-left-to-bottom-right direction (plusTLBR)  ////////////////////////////////////////
+  let plusTLBRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate + 3);
+  let plusTLBRpair = document.getElementById(plusTLBRPairID).player;
+  let plusTLBRFirstdeleteID = "-" + (xCoordinate + 1) + "-" + (yCoordinate + 1);
+  let plusTLBRFirstdeleteField = document.getElementById(
+    plusTLBRFirstdeleteID
+  ).player;
+  let plusTLBRSeconddeleteID =
+    "-" + (xCoordinate + 2) + "-" + (yCoordinate + 2);
+  let plusTLBRSeconddeleteField = document.getElementById(
+    plusTLBRSeconddeleteID
+  ).player;
+  if (
+    plusTLBRpair === e.target.player &&
+    plusTLBRFirstdeleteField === plusTLBRSeconddeleteField
+  ) {
+    neutralizeFields(plusTLBRFirstdeleteID, plusTLBRSeconddeleteID);
+  }
+  ///// check plus Diagonal-bottom-left-to-top-right direction (plusBLTR)  ////////////////////////////////////////
+  let plusBLTRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate - 3);
+  let plusBLTRpair = document.getElementById(plusBLTRPairID).player;
+  let plusBLTRFirstdeleteID = "-" + (xCoordinate + 1) + "-" + (yCoordinate - 1);
+  let plusBLTRFirstdeleteField = document.getElementById(
+    plusBLTRFirstdeleteID
+  ).player;
+  let plusBLTRSeconddeleteID =
+    "-" + (xCoordinate + 2) + "-" + (yCoordinate - 2);
+  let plusBLTRSeconddeleteField = document.getElementById(
+    plusBLTRSeconddeleteID
+  ).player;
+  if (
+    plusBLTRpair === e.target.player &&
+    plusBLTRFirstdeleteField === plusBLTRSeconddeleteField
+  ) {
+    neutralizeFields(plusBLTRFirstdeleteID, plusBLTRSeconddeleteID);
   }
 }
 
