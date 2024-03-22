@@ -153,10 +153,12 @@ function checkrules(e) {
 
 function checkForWinner() {
   if (result === 5 || result === -5) {
+    // das alternative result = -5 ist nötig, da bei der subtraktion des -5. felds auch -10 gerechnet werden könnte
     console.warn("PLAYER 1 WINS!!!");
     winnerText.textContent = "BLACK WINS!!!🤪";
     winnerText.classList.remove("hide-winner");
   } else if (result === 50 || result === 49) {
+    // das alternative result = 49 ist nötig, da bei der subtraktion des -5. felds auch -1 gerechnet werden könnte
     console.warn("PLAYER 2 WINS!!!");
     winnerText.textContent = "WHITE WINS!!!🤪";
     winnerText.classList.remove("hide-winner");
@@ -179,8 +181,9 @@ function neutralizeFields(field1ID, field2ID) {
 function checkDeleteStones(e) {
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
+  let blockDelete = false;
   // Check for encircling enemy figures
-  ///// check MinusX direction ////////////////////////////////////////
+  ///// check MinusX direction /////////////////////////////////////////////////////////////////////////
   let minusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
   let minusXpair = document.getElementById(minusXPairID).player;
   let minusXFirstdeleteID = "-" + (xCoordinate - 1) + "-" + yCoordinate;
@@ -189,14 +192,33 @@ function checkDeleteStones(e) {
   let minusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
   let minusXSeconddeleteField =
     document.getElementById(minusXSeconddeleteID).player;
+  // Abfrage ob eine selbsteinkesselung erfolgt und ob der zug dadurch verboten werden muss (block)
+  let minusXblockID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
+  let minusXblock = document.getElementById(minusXblockID).player;
+  /*
+  if (
+    e.target.player === minusXFirstdeleteField &&
+    minusXblock === minusXSeconddeleteField
+  ) {
+    console.log("blockdelete=true");
+    blockDelete = true;
+    e.target.classList.remove("white");
+    e.target.classList.remove("black");
+    e.target.classList.add("transparent");
+    e.target.player = 0;
+    return;
+  }
+  */
   if (
     minusXpair === e.target.player &&
     minusXFirstdeleteField === minusXSeconddeleteField &&
     e.target.player !== minusXFirstdeleteField
+    // && blockDelete === false
   ) {
     neutralizeFields(minusXFirstdeleteID, minusXSeconddeleteID);
   }
-  ///// check PlusX direction ////////////////////////////////////////
+
+  ///// check PlusX direction ///////////////////////////////////////////////////////////////////////////////
   let plusXPairID = "-" + (xCoordinate + 3) + "-" + yCoordinate;
   let plusXpair = document.getElementById(plusXPairID).player;
   let plusXFirstdeleteID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
@@ -212,7 +234,7 @@ function checkDeleteStones(e) {
   ) {
     neutralizeFields(plusXFirstdeleteID, plusXSeconddeleteID);
   }
-  ///// check MinusY direction ////////////////////////////////////////
+  ///// check MinusY direction /////////////////////////////////////////////////////////////////////////////////
   let minusYPairID = "-" + xCoordinate + "-" + (yCoordinate - 3);
   let minusYpair = document.getElementById(minusYPairID).player;
   let minusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate - 1);
@@ -228,7 +250,7 @@ function checkDeleteStones(e) {
   ) {
     neutralizeFields(minusYFirstdeleteID, minusYSeconddeleteID);
   }
-  ///// check PlusY direction ////////////////////////////////////////
+  ///// check PlusY direction /////////////////////////////////////////////////////////////////////////////////////////
   let plusYPairID = "-" + xCoordinate + "-" + (yCoordinate + 3);
   let plusYpair = document.getElementById(plusYPairID).player;
   let plusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate + 1);
@@ -317,7 +339,8 @@ function checkDeleteStones(e) {
   ).player;
   if (
     plusBLTRpair === e.target.player &&
-    plusBLTRFirstdeleteField === plusBLTRSeconddeleteField
+    plusBLTRFirstdeleteField === plusBLTRSeconddeleteField &&
+    e.target.player !== plusBLTRSeconddeleteField
   ) {
     neutralizeFields(plusBLTRFirstdeleteID, plusBLTRSeconddeleteID);
   }
