@@ -33,6 +33,10 @@ function renderGame() {
   }
 }
 
+function getPlayer(id) {
+  return document.getElementById(id) ? document.getElementById(id).player : 0;
+}
+
 function checkrules(e) {
   checkDeleteStones(e);
   counter = 0;
@@ -54,15 +58,15 @@ function checkrules(e) {
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + (z - 5) + "-" + yCoordinate;
-        substractionField = document.getElementById(substractionID);
+        substractionField = getPlayer(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + z + "-" + yCoordinate;
-      const searchedField = document.getElementById(searchedID);
+      const searchedField = getPlayer(searchedID);
       if (!substractionField) {
-        result += searchedField.player;
+        result += searchedField;
       } else {
-        result += searchedField.player - substractionField.player;
+        result += searchedField - substractionField;
       }
       checkForWinner();
     }
@@ -79,15 +83,15 @@ function checkrules(e) {
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + xCoordinate + "-" + (z - 5);
-        substractionField = document.getElementById(substractionID);
+        substractionField = getPlayer(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + xCoordinate + "-" + z;
-      const searchedField = document.getElementById(searchedID);
+      const searchedField = getPlayer(searchedID);
       if (!substractionField) {
-        result += searchedField.player;
+        result += searchedField;
       } else {
-        result += searchedField.player - substractionField.player;
+        result += searchedField - substractionField;
       }
       checkForWinner();
     }
@@ -106,15 +110,15 @@ function checkrules(e) {
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + (xx - 5) + "-" + (yy - 5);
-        substractionField = document.getElementById(substractionID);
+        substractionField = getPlayer(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + xx + "-" + yy;
-      const searchedField = document.getElementById(searchedID);
+      const searchedField = getPlayer(searchedID);
       if (!substractionField) {
-        result += searchedField.player;
+        result += searchedField;
       } else {
-        result += searchedField.player - substractionField.player;
+        result += searchedField - substractionField;
       }
       checkForWinner();
     }
@@ -124,8 +128,6 @@ function checkrules(e) {
   counter = 0;
   yy = yCoordinate + 4;
   xx = xCoordinate - 4;
-  //console.log("xx", xx, "yy", yy);
-  //console.log("xCoordinate", xCoordinate, "yCoordinate", yCoordinate);
   for (; yy >= yCoordinate - 4 && xx <= xCoordinate + 4; yy-- && xx++) {
     if (yy < 1 || yy > fieldsize || xx < 1 || xx > fieldsize) {
       continue;
@@ -135,15 +137,15 @@ function checkrules(e) {
       // suche nach dem ersten feld welches wieder aus der berechnung der siegeskette fliegt (z-5)
       if (counter > 5) {
         const substractionID = "-" + (xx - 5) + "-" + (yy + 5);
-        substractionField = document.getElementById(substractionID);
+        substractionField = getPlayer(substractionID);
       }
       // suche nach allen relevanten feldern für die siegeskette
       const searchedID = "-" + xx + "-" + yy;
-      const searchedField = document.getElementById(searchedID);
+      const searchedField = getPlayer(searchedID);
       if (!substractionField) {
-        result += searchedField.player;
+        result += searchedField;
       } else {
-        result += searchedField.player - substractionField.player;
+        result += searchedField - substractionField;
       }
       checkForWinner();
     }
@@ -185,16 +187,17 @@ function checkDeleteStones(e) {
   // Check for encircling enemy figures
   ///// check MinusX direction /////////////////////////////////////////////////////////////////////////
   let minusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
-  let minusXpair = document.getElementById(minusXPairID).player;
+  let minusXpair = getPlayer(minusXPairID);
+
   let minusXFirstdeleteID = "-" + (xCoordinate - 1) + "-" + yCoordinate;
-  let minusXFirstdeleteField =
-    document.getElementById(minusXFirstdeleteID).player;
+  let minusXFirstdeleteField = getPlayer(minusXFirstdeleteID);
+
   let minusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
-  let minusXSeconddeleteField =
-    document.getElementById(minusXSeconddeleteID).player;
+  let minusXSeconddeleteField = getPlayer(minusXSeconddeleteID);
+
   // Abfrage ob eine selbsteinkesselung erfolgt und ob der zug dadurch verboten werden muss (block)
   let minusXblockID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
-  let minusXblock = document.getElementById(minusXblockID).player;
+  let minusXblock = getPlayer(minusXblockID);
   /*
   if (
     e.target.player === minusXFirstdeleteField &&
@@ -208,7 +211,7 @@ function checkDeleteStones(e) {
     e.target.player = 0;
     return;
   }
-  */
+*/
   if (
     minusXpair === e.target.player &&
     minusXFirstdeleteField === minusXSeconddeleteField &&
@@ -220,13 +223,14 @@ function checkDeleteStones(e) {
 
   ///// check PlusX direction ///////////////////////////////////////////////////////////////////////////////
   let plusXPairID = "-" + (xCoordinate + 3) + "-" + yCoordinate;
-  let plusXpair = document.getElementById(plusXPairID).player;
+  let plusXpair = getPlayer(plusXPairID);
+
   let plusXFirstdeleteID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
-  let plusXFirstdeleteField =
-    document.getElementById(plusXFirstdeleteID).player;
+  let plusXFirstdeleteField = getPlayer(plusXFirstdeleteID);
+
   let plusXSeconddeleteID = "-" + (xCoordinate + 2) + "-" + yCoordinate;
-  let plusXSeconddeleteField =
-    document.getElementById(plusXSeconddeleteID).player;
+  let plusXSeconddeleteField = getPlayer(plusXSeconddeleteID);
+
   if (
     plusXpair === e.target.player &&
     plusXFirstdeleteField === plusXSeconddeleteField &&
@@ -236,13 +240,14 @@ function checkDeleteStones(e) {
   }
   ///// check MinusY direction /////////////////////////////////////////////////////////////////////////////////
   let minusYPairID = "-" + xCoordinate + "-" + (yCoordinate - 3);
-  let minusYpair = document.getElementById(minusYPairID).player;
+  let minusYpair = getPlayer(minusYPairID);
+
   let minusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate - 1);
-  let minusYFirstdeleteField =
-    document.getElementById(minusYFirstdeleteID).player;
+  let minusYFirstdeleteField = getPlayer(minusYFirstdeleteID);
+
   let minusYSeconddeleteID = "-" + xCoordinate + "-" + (yCoordinate - 2);
-  let minusYSeconddeleteField =
-    document.getElementById(minusYSeconddeleteID).player;
+  let minusYSeconddeleteField = getPlayer(minusYSeconddeleteID);
+
   if (
     minusYpair === e.target.player &&
     minusYFirstdeleteField === minusYSeconddeleteField &&
@@ -252,13 +257,14 @@ function checkDeleteStones(e) {
   }
   ///// check PlusY direction /////////////////////////////////////////////////////////////////////////////////////////
   let plusYPairID = "-" + xCoordinate + "-" + (yCoordinate + 3);
-  let plusYpair = document.getElementById(plusYPairID).player;
+  let plusYpair = getPlayer(plusYPairID);
+
   let plusYFirstdeleteID = "-" + xCoordinate + "-" + (yCoordinate + 1);
-  let plusYFirstdeleteField =
-    document.getElementById(plusYFirstdeleteID).player;
+  let plusYFirstdeleteField = getPlayer(plusYFirstdeleteID);
+
   let plusYSeconddeleteID = "-" + xCoordinate + "-" + (yCoordinate + 2);
-  let plusYSeconddeleteField =
-    document.getElementById(plusYSeconddeleteID).player;
+  let plusYSeconddeleteField = getPlayer(plusYSeconddeleteID);
+
   if (
     plusYpair === e.target.player &&
     plusYFirstdeleteField === plusYSeconddeleteField &&
@@ -268,17 +274,16 @@ function checkDeleteStones(e) {
   }
   ///// check Minus Diagonal-top-left-to-bottom-right direction (minusTLBR)  ////////////////////////////////////////
   let minusTLBRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate - 3);
-  let minusTLBRpair = document.getElementById(minusTLBRPairID).player;
+  let minusTLBRpair = getPlayer(minusTLBRPairID);
+
   let minusTLBRFirstdeleteID =
     "-" + (xCoordinate - 1) + "-" + (yCoordinate - 1);
-  let minusTLBRFirstdeleteField = document.getElementById(
-    minusTLBRFirstdeleteID
-  ).player;
+  let minusTLBRFirstdeleteField = getPlayer(minusTLBRFirstdeleteID);
+
   let minusTLBRSeconddeleteID =
     "-" + (xCoordinate - 2) + "-" + (yCoordinate - 2);
-  let minusTLBRSeconddeleteField = document.getElementById(
-    minusTLBRSeconddeleteID
-  ).player;
+  let minusTLBRSeconddeleteField = getPlayer(minusTLBRSeconddeleteID);
+
   if (
     minusTLBRpair === e.target.player &&
     minusTLBRFirstdeleteField === minusTLBRSeconddeleteField &&
@@ -288,17 +293,16 @@ function checkDeleteStones(e) {
   }
   ///// check Minus Diagonal-bottom-left-to-top-right direction (minusBLTR)  ////////////////////////////////////////
   let minusBLTRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate + 3);
-  let minusBLTRpair = document.getElementById(minusBLTRPairID).player;
+  let minusBLTRpair = getPlayer(minusBLTRPairID);
+
   let minusBLTRFirstdeleteID =
     "-" + (xCoordinate - 1) + "-" + (yCoordinate + 1);
-  let minusBLTRFirstdeleteField = document.getElementById(
-    minusBLTRFirstdeleteID
-  ).player;
+  let minusBLTRFirstdeleteField = getPlayer(minusBLTRFirstdeleteID);
+
   let minusBLTRSeconddeleteID =
     "-" + (xCoordinate - 2) + "-" + (yCoordinate + 2);
-  let minusBLTRSeconddeleteField = document.getElementById(
-    minusBLTRSeconddeleteID
-  ).player;
+  let minusBLTRSeconddeleteField = getPlayer(minusBLTRSeconddeleteID);
+
   if (
     minusBLTRpair === e.target.player &&
     minusBLTRFirstdeleteField === minusBLTRSeconddeleteField &&
@@ -308,16 +312,15 @@ function checkDeleteStones(e) {
   }
   ///// check plus Diagonal-top-left-to-bottom-right direction (plusTLBR)  ////////////////////////////////////////
   let plusTLBRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate + 3);
-  let plusTLBRpair = document.getElementById(plusTLBRPairID).player;
+  let plusTLBRpair = getPlayer(plusTLBRPairID);
+
   let plusTLBRFirstdeleteID = "-" + (xCoordinate + 1) + "-" + (yCoordinate + 1);
-  let plusTLBRFirstdeleteField = document.getElementById(
-    plusTLBRFirstdeleteID
-  ).player;
+  let plusTLBRFirstdeleteField = getPlayer(plusTLBRFirstdeleteID);
+
   let plusTLBRSeconddeleteID =
     "-" + (xCoordinate + 2) + "-" + (yCoordinate + 2);
-  let plusTLBRSeconddeleteField = document.getElementById(
-    plusTLBRSeconddeleteID
-  ).player;
+  let plusTLBRSeconddeleteField = getPlayer(plusTLBRSeconddeleteID);
+
   if (
     plusTLBRpair === e.target.player &&
     plusTLBRFirstdeleteField === plusTLBRSeconddeleteField &&
@@ -327,16 +330,15 @@ function checkDeleteStones(e) {
   }
   ///// check plus Diagonal-bottom-left-to-top-right direction (plusBLTR)  ////////////////////////////////////////
   let plusBLTRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate - 3);
-  let plusBLTRpair = document.getElementById(plusBLTRPairID).player;
+  let plusBLTRpair = getPlayer(plusBLTRPairID);
+
   let plusBLTRFirstdeleteID = "-" + (xCoordinate + 1) + "-" + (yCoordinate - 1);
-  let plusBLTRFirstdeleteField = document.getElementById(
-    plusBLTRFirstdeleteID
-  ).player;
+  let plusBLTRFirstdeleteField = getPlayer(plusBLTRFirstdeleteID);
+
   let plusBLTRSeconddeleteID =
     "-" + (xCoordinate + 2) + "-" + (yCoordinate - 2);
-  let plusBLTRSeconddeleteField = document.getElementById(
-    plusBLTRSeconddeleteID
-  ).player;
+  let plusBLTRSeconddeleteField = getPlayer(plusBLTRSeconddeleteID);
+
   if (
     plusBLTRpair === e.target.player &&
     plusBLTRFirstdeleteField === plusBLTRSeconddeleteField &&
