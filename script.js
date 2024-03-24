@@ -38,7 +38,7 @@ function getPlayer(id) {
 }
 
 function checkrules(e) {
-  checkDeleteStones(e);
+  checkremoveStones(e);
   counter = 0;
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
@@ -157,17 +157,17 @@ function checkForWinner() {
   if (result === 5 || result === -5) {
     // das alternative result = -5 ist nötig, da bei der subtraktion des -5. felds auch -10 gerechnet werden könnte
     console.warn("PLAYER 1 WINS!!!");
-    winnerText.textContent = "BLACK WINS!!!🤪";
+    winnerText.textContent = "BLACK WINS!!!👑";
     winnerText.classList.remove("hide-winner");
   } else if (result === 50 || result === 49) {
     // das alternative result = 49 ist nötig, da bei der subtraktion des -5. felds auch -1 gerechnet werden könnte
     console.warn("PLAYER 2 WINS!!!");
-    winnerText.textContent = "WHITE WINS!!!🤪";
+    winnerText.textContent = "WHITE WINS!!!👑";
     winnerText.classList.remove("hide-winner");
   }
 }
 
-function neutralizeFields(field1ID, field2ID) {
+function removeFigures(field1ID, field2ID) {
   let field1 = document.getElementById(field1ID);
   let field2 = document.getElementById(field2ID);
   field1.classList.remove("white");
@@ -180,10 +180,9 @@ function neutralizeFields(field1ID, field2ID) {
   field2.player = 0;
 }
 
-function checkDeleteStones(e) {
+function checkremoveStones(e) {
   xCoordinate = e.target.xCoordinate;
   yCoordinate = e.target.yCoordinate;
-  let blockDelete = false;
   // Check for encircling enemy figures
   ///// check MinusX direction /////////////////////////////////////////////////////////////////////////
   let minusXPairID = "-" + (xCoordinate - 3) + "-" + yCoordinate;
@@ -195,30 +194,35 @@ function checkDeleteStones(e) {
   let minusXSeconddeleteID = "-" + (xCoordinate - 2) + "-" + yCoordinate;
   let minusXSeconddeleteField = getPlayer(minusXSeconddeleteID);
 
-  // Abfrage ob eine selbsteinkesselung erfolgt und ob der zug dadurch verboten werden muss (block)
+  // Abfrage ob eine selbsteinkesselung erfolgt und ob der zug dadurch verboten/geblockt werden muss (block)
   let minusXblockID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
   let minusXblock = getPlayer(minusXblockID);
-  /*
+  let minus2XblockID = "-" + (xCoordinate + 2) + "-" + yCoordinate;
+  let minus2Xblock = getPlayer(minus2XblockID);
+
   if (
     e.target.player === minusXFirstdeleteField &&
-    minusXblock === minusXSeconddeleteField
+    minusXblock === minusXSeconddeleteField &&
+    minusXblock !== minusXFirstdeleteField
   ) {
-    console.log("blockdelete=true");
-    blockDelete = true;
-    e.target.classList.remove("white");
-    e.target.classList.remove("black");
-    e.target.classList.add("transparent");
-    e.target.player = 0;
-    return;
+    playerRotation--;
+    removeFigures(e.target.id, null);
   }
-*/
+
+  if (
+    e.target.player === minusXblock &&
+    minusXFirstdeleteField === minus2Xblock
+  ) {
+    playerRotation--;
+    removeFigures(e.target.id, null);
+  }
+
   if (
     minusXpair === e.target.player &&
     minusXFirstdeleteField === minusXSeconddeleteField &&
     e.target.player !== minusXFirstdeleteField
-    // && blockDelete === false
   ) {
-    neutralizeFields(minusXFirstdeleteID, minusXSeconddeleteID);
+    removeFigures(minusXFirstdeleteID, minusXSeconddeleteID);
   }
 
   ///// check PlusX direction ///////////////////////////////////////////////////////////////////////////////
@@ -231,12 +235,32 @@ function checkDeleteStones(e) {
   let plusXSeconddeleteID = "-" + (xCoordinate + 2) + "-" + yCoordinate;
   let plusXSeconddeleteField = getPlayer(plusXSeconddeleteID);
 
+  // Abfrage ob eine selbsteinkesselung erfolgt und ob der zug dadurch verboten/geblockt werden muss (block)
+  let plusXblockID = "-" + (xCoordinate + 1) + "-" + yCoordinate;
+  let plusXblock = getPlayer(plusXblockID);
+  let plus2XblockID = "-" + (xCoordinate + 2) + "-" + yCoordinate;
+  let plus2Xblock = getPlayer(plus2XblockID);
+
+  if (
+    e.target.player === plusXFirstdeleteField &&
+    plusXblock === plusXSeconddeleteField &&
+    plusXblock !== plusXFirstdeleteField
+  ) {
+    playerRotation--;
+    removeFigures(e.target.id, null);
+  }
+
+  if (e.target.player === plusXblock && plusXFirstdeleteField === plus2Xblock) {
+    playerRotation--;
+    removeFigures(e.target.id, null);
+  }
+
   if (
     plusXpair === e.target.player &&
     plusXFirstdeleteField === plusXSeconddeleteField &&
     e.target.player !== plusXFirstdeleteField
   ) {
-    neutralizeFields(plusXFirstdeleteID, plusXSeconddeleteID);
+    removeFigures(plusXFirstdeleteID, plusXSeconddeleteID);
   }
   ///// check MinusY direction /////////////////////////////////////////////////////////////////////////////////
   let minusYPairID = "-" + xCoordinate + "-" + (yCoordinate - 3);
@@ -253,7 +277,7 @@ function checkDeleteStones(e) {
     minusYFirstdeleteField === minusYSeconddeleteField &&
     e.target.player !== minusYFirstdeleteField
   ) {
-    neutralizeFields(minusYFirstdeleteID, minusYSeconddeleteID);
+    removeFigures(minusYFirstdeleteID, minusYSeconddeleteID);
   }
   ///// check PlusY direction /////////////////////////////////////////////////////////////////////////////////////////
   let plusYPairID = "-" + xCoordinate + "-" + (yCoordinate + 3);
@@ -270,7 +294,7 @@ function checkDeleteStones(e) {
     plusYFirstdeleteField === plusYSeconddeleteField &&
     e.target.player !== plusYFirstdeleteField
   ) {
-    neutralizeFields(plusYFirstdeleteID, plusYSeconddeleteID);
+    removeFigures(plusYFirstdeleteID, plusYSeconddeleteID);
   }
   ///// check Minus Diagonal-top-left-to-bottom-right direction (minusTLBR)  ////////////////////////////////////////
   let minusTLBRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate - 3);
@@ -289,7 +313,7 @@ function checkDeleteStones(e) {
     minusTLBRFirstdeleteField === minusTLBRSeconddeleteField &&
     e.target.player !== minusTLBRFirstdeleteField
   ) {
-    neutralizeFields(minusTLBRFirstdeleteID, minusTLBRSeconddeleteID);
+    removeFigures(minusTLBRFirstdeleteID, minusTLBRSeconddeleteID);
   }
   ///// check Minus Diagonal-bottom-left-to-top-right direction (minusBLTR)  ////////////////////////////////////////
   let minusBLTRPairID = "-" + (xCoordinate - 3) + "-" + (yCoordinate + 3);
@@ -308,7 +332,7 @@ function checkDeleteStones(e) {
     minusBLTRFirstdeleteField === minusBLTRSeconddeleteField &&
     e.target.player !== minusBLTRFirstdeleteField
   ) {
-    neutralizeFields(minusBLTRFirstdeleteID, minusBLTRSeconddeleteID);
+    removeFigures(minusBLTRFirstdeleteID, minusBLTRSeconddeleteID);
   }
   ///// check plus Diagonal-top-left-to-bottom-right direction (plusTLBR)  ////////////////////////////////////////
   let plusTLBRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate + 3);
@@ -326,7 +350,7 @@ function checkDeleteStones(e) {
     plusTLBRFirstdeleteField === plusTLBRSeconddeleteField &&
     e.target.player !== plusTLBRFirstdeleteField
   ) {
-    neutralizeFields(plusTLBRFirstdeleteID, plusTLBRSeconddeleteID);
+    removeFigures(plusTLBRFirstdeleteID, plusTLBRSeconddeleteID);
   }
   ///// check plus Diagonal-bottom-left-to-top-right direction (plusBLTR)  ////////////////////////////////////////
   let plusBLTRPairID = "-" + (xCoordinate + 3) + "-" + (yCoordinate - 3);
@@ -344,7 +368,7 @@ function checkDeleteStones(e) {
     plusBLTRFirstdeleteField === plusBLTRSeconddeleteField &&
     e.target.player !== plusBLTRSeconddeleteField
   ) {
-    neutralizeFields(plusBLTRFirstdeleteID, plusBLTRSeconddeleteID);
+    removeFigures(plusBLTRFirstdeleteID, plusBLTRSeconddeleteID);
   }
 }
 
@@ -361,11 +385,13 @@ function setCharacter(e) {
       clickedField.classList.add("white");
       e.target.player = 1; //  player 1 (white) bekommt 1 punkt pro feld, wenn 5 felder in einer reihe = 5 sind, dann gewinnt player 1
       playerRotation++;
+      console.warn("playerRotation", playerRotation);
     } else {
       clickedField.classList.remove("transparent");
       clickedField.classList.add("black");
       e.target.player = 10; //  player 2 (schwarz) bekommt 10 punkte pro feld, wenn 5 felder in einer reihe = 50 sind, dann gewinnt player 2
       playerRotation++;
+      console.warn("playerRotation", playerRotation);
     }
   }
   checkrules(e);
