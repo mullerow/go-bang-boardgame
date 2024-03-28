@@ -18,4 +18,6 @@ I love Go Bang! And that's why it's a pleasure for me to rebuild the game to sha
 
 the time horizon until completion is indefinite.
 
-Used technologies:
+### development status of the app (28.03.24)
+
+<img src="./Go-Bang-Entwicklungsstand-28.03.24.png" alt="board-game-example">
